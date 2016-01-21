@@ -12,8 +12,8 @@ package estadistica.modelo;
 public class Articulo {
 
     private final String nombre;
-    private final int cantidad;
-    private final float precio_unidad;
+    private int cantidad;
+    private float precio_unidad;
 
     public Articulo(String nombre, int cantidad, float precio_unidad) {
         this.nombre = nombre;
@@ -40,6 +40,14 @@ public class Articulo {
 
     public float getPrecioTotalIVA() {
         return (cantidad * precio_unidad) * 1.21f;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setPrecio_unidad(float precio_unidad) {
+        this.precio_unidad = precio_unidad;
     }
 
 }
