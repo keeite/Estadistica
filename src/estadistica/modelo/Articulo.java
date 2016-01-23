@@ -7,7 +7,7 @@ package estadistica.modelo;
 
 /**
  *
- * @author a048598270y
+ * @author Programador
  */
 public class Articulo {
 
