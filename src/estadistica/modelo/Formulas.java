@@ -6,7 +6,7 @@
  */
 package estadistica.modelo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Formulas {
     public Formulas() {
     }
 
-    public int cantArti(ArrayList<Articulo> articulos) {
+    public int cantArti(List<Articulo> articulos) {
         return articulos.size();
     }
 
@@ -27,7 +27,7 @@ public class Formulas {
      * @param articulos array de articulos
      * @return devuelve la cantidad
      */
-    public int cantTotal(ArrayList<Articulo> articulos) {
+    public int cantTotal(List<Articulo> articulos) {
         int cantidad = 0;
 
         for (int i = 0; i < articulos.size(); i++) {
@@ -36,15 +36,15 @@ public class Formulas {
 
         return cantidad;
     }
-    
+
     /**
      * Metodo para sumar precios de articulos del array
      *
      * @param articulos array de articulos
      * @return devuelve el precio total
      */
-    public int precioTotal(ArrayList<Articulo> articulos) {
-        int cantidad = 0;
+    public float precioTotal(List<Articulo> articulos) {
+        float cantidad = 0f;
 
         for (int i = 0; i < articulos.size(); i++) {
             cantidad += articulos.get(i).getPrecio_unidad();
@@ -59,31 +59,31 @@ public class Formulas {
      * @param artiMedia array de articulos exclusivamente para la media
      * @return devuelve el precio total
      */
-    public float mediaCant(ArrayList<Articulo> artiMedia) {
+    private float mediaCant(List<Articulo> artiMedia) {
         float media;
-        
+
         media = cantTotal(artiMedia) / cantArti(artiMedia);
-        
+
         return media;
     }
-    
+
     /**
      * Metodo calcular la media de precios de los articulos del array
      *
      * @param artiMedia array de articulos exclusivamente para la media
      * @return devuelve el precio total
      */
-    public float mediaPrecio(ArrayList<Articulo> artiMedia) {
+    public float mediaPrecio(List<Articulo> artiMedia) {
         float media;
-        
+
         media = precioTotal(artiMedia) / cantArti(artiMedia);
-        
+
         return media;
     }
-    
-    public float precioMax(ArrayList<Articulo> articulos) {
+
+    public float precioMax(List<Articulo> articulos) {
         float max = 0;
-                
+
         for (int i = 0; i < articulos.size(); i++) {
             if (articulos.get(i).getPrecio_unidad() > max) {
                 max = articulos.get(i).getPrecio_unidad();
@@ -91,21 +91,22 @@ public class Formulas {
         }
         return max;
     }
-    
-    public float precioMin(ArrayList<Articulo> articulos) {
+
+    public float precioMin(List<Articulo> articulos) {
         float min = 0;
-                
+        float max = precioMax(articulos);
+
         for (int i = 0; i < articulos.size(); i++) {
-            if (articulos.get(i).getPrecio_unidad() < min) {
+            if (articulos.get(i).getPrecio_unidad() < max) {
                 min = articulos.get(i).getPrecio_unidad();
             }
         }
         return min;
     }
-    
-    public int moda(ArrayList<Articulo> articulos) {
+
+    public int moda(List<Articulo> articulos) {
         int repite = 0, moda = 0;
-        
+
         for (int i = 0; i < articulos.size(); i++) {
             int seRepite = 0;
             for (int j = 0; j < articulos.size(); j++) {
@@ -120,17 +121,17 @@ public class Formulas {
         }
         return moda;
     }
-    
-    public float varianza(ArrayList<Articulo> articulos) {
+
+    public float varianza(List<Articulo> articulos) {
         float varianza = 0, rango;
-        
-        for(int i = 0 ; i < articulos.size(); i++){
+
+        for (int i = 0; i < articulos.size(); i++) {
             rango = (float) Math.pow(articulos.get(i).getCantidad() - mediaCant(articulos), 2f);
             varianza += rango;
         }
         varianza = varianza / articulos.size();
-        
+
         return varianza;
     }
-    
+
 }
