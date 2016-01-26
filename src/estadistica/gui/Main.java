@@ -31,9 +31,9 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Control de inventario");
         this.setResizable(false);
-        setSize(763, 630);
+        //setSize(763, 630);
         this.validate();
-        //this.pack();
+        this.pack();
     }
 
     /**
