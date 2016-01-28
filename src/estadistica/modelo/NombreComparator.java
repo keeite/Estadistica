@@ -5,7 +5,6 @@
  */
 package estadistica.modelo;
 
-import estadistica.modelo.Articulo;
 import java.util.Comparator;
 
 /**
@@ -16,13 +15,13 @@ public class NombreComparator implements Comparator {
 
     @Override
     public int compare(Object o1, Object o2) {
-        Articulo c = (Articulo) o1;
+        Articulo a = (Articulo) o1;
         if (o2 instanceof Articulo) {
             Articulo c2 = (Articulo) o2;
-            return c.getNombre().compareTo(c2.getNombre());
+            return a.getNombre().compareTo(c2.getNombre());
         } else {
             String s = o2.toString();
-            return c.getNombre().compareTo(s);
+            return a.getNombre().compareTo(s);
         }
     }
 }

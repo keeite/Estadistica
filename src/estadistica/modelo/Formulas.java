@@ -14,10 +14,13 @@ import java.util.List;
  */
 public class Formulas {
 
-    public Formulas() {
+    List<Articulo> articulos;
+
+    public Formulas(List<Articulo> articulos) {
+        this.articulos = articulos;
     }
 
-    public int cantArti(List<Articulo> articulos) {
+    public int cantArti() {
         return articulos.size();
     }
 
@@ -27,7 +30,7 @@ public class Formulas {
      * @param articulos array de articulos
      * @return devuelve la cantidad
      */
-    public int cantTotal(List<Articulo> articulos) {
+    public int cantTotal() {
         int cantidad = 0;
 
         for (int i = 0; i < articulos.size(); i++) {
@@ -43,7 +46,7 @@ public class Formulas {
      * @param articulos array de articulos
      * @return devuelve el precio total
      */
-    public float precioTotal(List<Articulo> articulos) {
+    public float precioTotal() {
         float cantidad = 0f;
 
         for (int i = 0; i < articulos.size(); i++) {
@@ -59,10 +62,10 @@ public class Formulas {
      * @param artiMedia array de articulos exclusivamente para la media
      * @return devuelve el precio total
      */
-    private float mediaCant(List<Articulo> artiMedia) {
+    private float mediaCant() {
         float media;
 
-        media = cantTotal(artiMedia) / cantArti(artiMedia);
+        media = cantTotal() / cantArti();
 
         return media;
     }
@@ -73,15 +76,15 @@ public class Formulas {
      * @param artiMedia array de articulos exclusivamente para la media
      * @return devuelve el precio total
      */
-    public float mediaPrecio(List<Articulo> artiMedia) {
+    public float mediaPrecio() {
         float media;
 
-        media = precioTotal(artiMedia) / cantArti(artiMedia);
+        media = precioTotal() / cantArti();
 
         return media;
     }
 
-    public float precioMax(List<Articulo> articulos) {
+    public float precioMax() {
         float max = 0;
 
         for (int i = 0; i < articulos.size(); i++) {
@@ -92,9 +95,9 @@ public class Formulas {
         return max;
     }
 
-    public float precioMin(List<Articulo> articulos) {
+    public float precioMin() {
         float min = 0;
-        float max = precioMax(articulos);
+        float max = precioMax();
 
         for (int i = 0; i < articulos.size(); i++) {
             if (articulos.get(i).getPrecio_unidad() < max) {
@@ -104,7 +107,7 @@ public class Formulas {
         return min;
     }
 
-    public int moda(List<Articulo> articulos) {
+    public int moda() {
         int repite = 0, moda = 0;
 
         for (int i = 0; i < articulos.size(); i++) {
@@ -122,11 +125,11 @@ public class Formulas {
         return moda;
     }
 
-    public float varianza(List<Articulo> articulos) {
+    public float varianza() {
         float varianza = 0, rango;
 
         for (int i = 0; i < articulos.size(); i++) {
-            rango = (float) Math.pow(articulos.get(i).getCantidad() - mediaCant(articulos), 2f);
+            rango = (float) Math.pow(articulos.get(i).getCantidad() - mediaCant(), 2f);
             varianza += rango;
         }
         varianza = varianza / articulos.size();

@@ -15,11 +15,11 @@ import java.util.Comparator;
 public class CantidadComparator implements Comparator<Articulo> {
 
     @Override
-    public int compare(Articulo c1, Articulo c2) {
-        if (c1.getCantidad()> c2.getCantidad()) {
+    public int compare(Articulo a1, Articulo a2) {
+        if (a1.getCantidad()> a2.getCantidad()) {
             return 1;
         }
-        if (c1.getCantidad() < c2.getCantidad()) {
+        if (a1.getCantidad() < a2.getCantidad()) {
             return -1;
         }
         return 0;

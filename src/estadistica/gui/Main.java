@@ -7,6 +7,7 @@ package estadistica.gui;
 
 import estadistica.modelo.Articulo;
 import estadistica.modelo.Formulas;
+import estadistica.modelo.NombreComparator;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,6 +20,7 @@ import net.ausiasmarch.common.Convert;
 public class Main extends javax.swing.JFrame {
 
     List<Articulo> articulos = new ArrayList();
+    List<Articulo> busqueda = new ArrayList();
 
     /**
      * Creates new form Estadistica
@@ -28,6 +30,8 @@ public class Main extends javax.swing.JFrame {
         String[] cabeceraTabla = {"Articulo", "Cantidad", "Precio/Unidad", "Precio total", "Total con IVA"};
         gridPrincipal.setColumnIdentifiers(cabeceraTabla);
         gridPrincipal.setNumRows(articulos.size());
+        gridBusqueda.setColumnIdentifiers(cabeceraTabla);
+        gridBusqueda.setNumRows(busqueda.size());
         setLocationRelativeTo(null);
         setTitle("Control de inventario");
         this.setResizable(false);
@@ -79,14 +83,18 @@ public class Main extends javax.swing.JFrame {
         jButtonCalcular = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        jTextFieldArtBusqueda = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButtonBuscarArt = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        jTextFieldPrecioBusqueda = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        jTextFieldCantBusqueda = new javax.swing.JTextField();
+        jComboBoxCompBusqueda = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        gridBusqueda = new estadistica.modelo.Grid();
+        jButtonBuscarPrecio = new javax.swing.JButton();
+        jButtonBuscarCant = new javax.swing.JButton();
         jTextFieldBorrado = new javax.swing.JTextField();
         jButtonBorrar = new javax.swing.JButton();
         jButtonLimpiar = new javax.swing.JButton();
@@ -190,9 +198,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jToggleButtonOrdenarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButtonOrdenarArticulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jToggleButtonOrdenarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -276,24 +284,24 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 43, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 55, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTextFieldPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldModa, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTextFieldPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12)
-                                .addGap(12, 12, 12)
-                                .addComponent(jTextFieldVarianza, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldVarianza, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButtonCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -331,57 +339,99 @@ public class Main extends javax.swing.JFrame {
 
         jLabel5.setText("Artículo:");
 
-        jButton2.setText("Buscar");
-        jButton2.setToolTipText("");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarArt.setText("Buscar");
+        jButtonBuscarArt.setToolTipText("");
+        jButtonBuscarArt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonBuscarArtActionPerformed(evt);
             }
         });
 
-        jLabel15.setText("Precio Total:");
+        jLabel15.setText("Precio Total IVA:");
 
         jLabel17.setText("Cantidad:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Igual a", "Mayor o igual a", "Menor o igual a", "Mayor a", "Menor a" }));
+        jComboBoxCompBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Igual a", "Mayor o igual a", "Menor o igual a", "Mayor a", "Menor a" }));
+
+        gridBusqueda.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(gridBusqueda);
+
+        jButtonBuscarPrecio.setText("Buscar");
+        jButtonBuscarPrecio.setToolTipText("");
+        jButtonBuscarPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarPrecioActionPerformed(evt);
+            }
+        });
+
+        jButtonBuscarCant.setText("Buscar");
+        jButtonBuscarCant.setToolTipText("");
+        jButtonBuscarCant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarCantActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15)
-                .addGap(3, 3, 3)
-                .addComponent(jLabel13)
-                .addGap(3, 3, 3)
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldArtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                    .addComponent(jButtonBuscarArt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel13)
+                        .addGap(70, 70, 70))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonBuscarPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldPrecioBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, 0, 168, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBoxCompBusqueda, 0, 173, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonBuscarCant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldCantBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldArtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
+                    .addComponent(jTextFieldPrecioBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(132, Short.MAX_VALUE))
+                    .addComponent(jTextFieldCantBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxCompBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonBuscarArt)
+                    .addComponent(jButtonBuscarPrecio)
+                    .addComponent(jButtonBuscarCant))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
         );
 
         jTextFieldBorrado.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -475,11 +525,35 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButtonBuscarArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarArtActionPerformed
+
+        if (jTextFieldArtBusqueda.getText().isEmpty()) {
+            mensaje("Este campo de busqueda no puede estar vacio");
+            return;
+        }
+        if (!jTextFieldArtBusqueda.getText().matches("[A-Za-zÁÉÍÓÚáéíóúñÑ]*(\\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+)*")) {
+            mensaje("Formato del articulo no válido");
+            return;
+        }
+        String nombre = jTextFieldArtBusqueda.getText();
+        limpiarBusqueda();
+
+        for (Articulo a : articulos) {
+            if (a.getNombre().equalsIgnoreCase(nombre)) {
+                busqueda.add(a);
+            }
+        }
+
+        resultadosBusqueda();
+
+    }//GEN-LAST:event_jButtonBuscarArtActionPerformed
 
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+
+        if (!jTextFieldBorrado.getText().matches("[A-Za-zÁÉÍÓÚáéíóúñÑ]*(\\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+)*")) {
+            mensaje("Formato del articulo no válido");
+            return;
+        }
 
         for (Articulo art : articulos) {
             if (art.getNombre().equalsIgnoreCase(jTextFieldBorrado.getText())) {
@@ -498,8 +572,13 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        dispose();
-        System.exit(0);
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro que deseas salir?", "Salir", JOptionPane.OK_CANCEL_OPTION);
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            dispose();
+            System.exit(0);
+        }
+
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void jButtonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnadirActionPerformed
@@ -532,27 +611,44 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAnadirActionPerformed
 
     private void jToggleButtonOrdenarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonOrdenarArticuloActionPerformed
-        // TODO add your handling code here:
+
+        NombreComparator nombreComp = new NombreComparator();
+
+        for (int i = 0; i < articulos.size() - 1; i++) {
+
+            for (int j = i + 1; i < articulos.size(); i++) {
+                if (nombreComp.compare(articulos.get(i), articulos.get(j)) > 0) {
+                    Articulo comodin = articulos.get(i);
+                    articulos.set(i, articulos.get(j));
+                    articulos.set(j, comodin);
+
+                }
+
+            }
+
+        }
+        dibujarGridPrincipal();
+
     }//GEN-LAST:event_jToggleButtonOrdenarArticuloActionPerformed
 
     private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
         if (articulos.isEmpty()) {
             mensaje("La lista esta vacia, no hay nada que calcular.");
         } else {
-            Formulas estadisticas = new Formulas();
+            Formulas estadisticas = new Formulas(articulos);
 
             String numeroDeArticulos, cantidadTotal,
                     precioTotal, modaCantidad, mediaPrecio,
                     precioMax, precioMin, varianza;
 
-            numeroDeArticulos = Convert.format(estadisticas.cantArti(articulos));
-            cantidadTotal = Convert.format(estadisticas.cantTotal(articulos));
-            precioTotal = Convert.format(estadisticas.precioTotal(articulos), 2);
-            modaCantidad = Convert.format(estadisticas.moda(articulos), 2);
-            mediaPrecio = Convert.format(estadisticas.mediaPrecio(articulos), 2);
-            precioMax = Convert.format(estadisticas.precioMax(articulos), 2);
-            precioMin = Convert.format(estadisticas.precioMin(articulos), 2);
-            varianza = Convert.format(estadisticas.varianza(articulos), 4);
+            numeroDeArticulos = Convert.format(estadisticas.cantArti());
+            cantidadTotal = Convert.format(estadisticas.cantTotal());
+            precioTotal = Convert.format(estadisticas.precioTotal(), 2);
+            modaCantidad = Convert.format(estadisticas.moda());
+            mediaPrecio = Convert.format(estadisticas.mediaPrecio(), 2);
+            precioMax = Convert.format(estadisticas.precioMax(), 2);
+            precioMin = Convert.format(estadisticas.precioMin(), 2);
+            varianza = Convert.format(estadisticas.varianza(), 4);
 
             jTextFieldNumArticulos.setText(numeroDeArticulos);
             jTextFieldCantTotal.setText(cantidadTotal);
@@ -574,6 +670,86 @@ public class Main extends javax.swing.JFrame {
             jButtonBorrar.setEnabled(false);
         }
     }//GEN-LAST:event_jTextFieldBorradoKeyReleased
+
+    private void jButtonBuscarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarPrecioActionPerformed
+
+        if (jTextFieldPrecioBusqueda.getText().isEmpty()) {
+            mensaje("Este campo de busqueda no puede estar vacio");
+            return;
+        } else if (!Convert.isValidFloat(jTextFieldPrecioBusqueda.getText())) {
+            mensaje("No es un numero valido");
+            return;
+        }
+
+        float precioIVA = Convert.parseFloat(jTextFieldPrecioBusqueda.getText());
+
+        limpiarBusqueda();
+
+        for (Articulo a : articulos) {
+            if (a.getPrecioTotalIVA() == precioIVA) {
+                busqueda.add(a);
+            }
+        }
+        resultadosBusqueda();
+
+    }//GEN-LAST:event_jButtonBuscarPrecioActionPerformed
+
+    private void jButtonBuscarCantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarCantActionPerformed
+
+        if (jTextFieldCantBusqueda.getText().isEmpty()) {
+            mensaje("Este campo de busqueda no puede estar vacio");
+            return;
+        } else if (!Convert.isValidInt(jTextFieldCantBusqueda.getText())) {
+            mensaje("No es un numero valido");
+            return;
+        }
+        int cantidad = Convert.parseInt(jTextFieldCantBusqueda.getText());
+
+        limpiarBusqueda();
+
+        switch (jComboBoxCompBusqueda.getSelectedIndex()) {
+
+            case 0:
+                for (Articulo a : articulos) {
+                    if (a.getCantidad() == cantidad) {
+                        busqueda.add(a);
+                    }
+                }
+                break;
+            case 1:
+                for (Articulo a : articulos) {
+                    if (a.getCantidad() >= cantidad) {
+                        busqueda.add(a);
+                    }
+                }
+                break;
+            case 2:
+                for (Articulo a : articulos) {
+                    if (a.getCantidad() <= cantidad) {
+                        busqueda.add(a);
+                    }
+                }
+                break;
+            case 3:
+                for (Articulo a : articulos) {
+                    if (a.getCantidad() > cantidad) {
+                        busqueda.add(a);
+                    }
+                }
+                break;
+            case 4:
+                for (Articulo a : articulos) {
+                    if (a.getCantidad() < cantidad) {
+                        busqueda.add(a);
+                    }
+                }
+                break;
+
+        }
+
+        resultadosBusqueda();
+
+    }//GEN-LAST:event_jButtonBuscarCantActionPerformed
 
     private void mensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
@@ -614,6 +790,23 @@ public class Main extends javax.swing.JFrame {
         return true;
     }
 
+    private void resultadosBusqueda() {
+        for (int i = 0; i < busqueda.size(); i++) {
+            gridBusqueda.setValueAt(busqueda.get(i).getNombre(), i, 0);
+            gridBusqueda.setValueAt(busqueda.get(i).getCantidad(), i, 1);
+            gridBusqueda.setValueAt(Convert.format(busqueda.get(i).getPrecio_unidad(), 2), i, 2);
+            gridBusqueda.setValueAt(Convert.format(busqueda.get(i).getPrecioTotal(), 2), i, 3);
+            gridBusqueda.setValueAt(Convert.format(busqueda.get(i).getPrecioTotalIVA(), 2), i, 4);
+        }
+    }
+
+    private void limpiarBusqueda() {
+        if (!busqueda.isEmpty()) {
+            busqueda.clear();
+            gridBusqueda.clear();
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -629,14 +822,17 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private estadistica.modelo.Grid gridBusqueda;
     private estadistica.modelo.Grid gridPrincipal;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAnadir;
     private javax.swing.JButton jButtonBorrar;
+    private javax.swing.JButton jButtonBuscarArt;
+    private javax.swing.JButton jButtonBuscarCant;
+    private javax.swing.JButton jButtonBuscarPrecio;
     private javax.swing.JButton jButtonCalcular;
     private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonSalir;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBoxCompBusqueda;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -659,17 +855,18 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextFieldArtBusqueda;
     private javax.swing.JTextField jTextFieldArticulo;
     private javax.swing.JTextField jTextFieldBorrado;
+    private javax.swing.JTextField jTextFieldCantBusqueda;
     private javax.swing.JTextField jTextFieldCantTotal;
     private javax.swing.JTextField jTextFieldCantidad;
     private javax.swing.JTextField jTextFieldMedia;
     private javax.swing.JTextField jTextFieldModa;
     private javax.swing.JTextField jTextFieldNumArticulos;
     private javax.swing.JTextField jTextFieldPrecio;
+    private javax.swing.JTextField jTextFieldPrecioBusqueda;
     private javax.swing.JTextField jTextFieldPrecioMax;
     private javax.swing.JTextField jTextFieldPrecioMin;
     private javax.swing.JTextField jTextFieldPrecioTotal;
@@ -697,4 +894,5 @@ public class Main extends javax.swing.JFrame {
 
         }
     }
+
 }
